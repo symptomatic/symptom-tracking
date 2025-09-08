@@ -1,0 +1,213 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "symptom-assessment",
+  "url": "http://honeycomb.ai/fhir/Questionnaire/symptom-assessment",
+  "version": "1.0.0",
+  "name": "SymptomAssessmentQuestionnaire",
+  "title": "Medical Symptom Assessment",
+  "status": "active",
+  "subjectType": ["Patient"],
+  "date": "2025-01-01",
+  "publisher": "Honeycomb Medical",
+  "description": "Initial symptom assessment questionnaire for spaceflight participants",
+  "purpose": "To gather initial symptoms and route to appropriate medical interventions",
+  "code": [
+    {
+      "system": "http://loinc.org",
+      "code": "69730-0",
+      "display": "Initial assessment"
+    }
+  ],
+  "item": [
+    {
+      "linkId": "1",
+      "text": "Please describe your medical issue in detail",
+      "type": "text",
+      "required": true
+    },
+    {
+      "linkId": "2",
+      "text": "Select all symptoms that apply",
+      "type": "choice",
+      "repeats": true,
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "102491009",
+            "display": "Flank pain"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "34436003",
+            "display": "Blood in urine (hematuria)"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "161891005",
+            "display": "Back pain"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "25064002",
+            "display": "Headache"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "404640003",
+            "display": "Dizziness"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "87715008",
+            "display": "Dry mouth"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "422587007",
+            "display": "Nausea"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "422400008",
+            "display": "Vomiting"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "386661006",
+            "display": "Fever"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://snomed.info/sct",
+            "code": "13791008",
+            "display": "Weakness"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "3",
+      "text": "Symptom Duration",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "3.1",
+          "text": "When did these symptoms start?",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "less-1h",
+                "display": "Less than 1 hour ago"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "1-6h",
+                "display": "1-6 hours ago"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "6-24h",
+                "display": "6-24 hours ago"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "more-24h",
+                "display": "More than 24 hours ago"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "4",
+      "text": "Severity Assessment",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "4.1",
+          "text": "Rate your current pain/discomfort level (0 = no pain, 10 = worst imaginable)",
+          "type": "integer",
+          "required": true,
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-minValue",
+              "valueInteger": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-maxValue",
+              "valueInteger": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "5",
+      "text": "Additional Information",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "5.1",
+          "text": "Are you currently taking any medications?",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "linkId": "5.2",
+          "text": "If yes, please list medications",
+          "type": "text",
+          "enableWhen": [
+            {
+              "question": "5.1",
+              "operator": "=",
+              "answerBoolean": true
+            }
+          ]
+        },
+        {
+          "linkId": "5.3",
+          "text": "Do you have any known allergies?",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "linkId": "5.4",
+          "text": "If yes, please list allergies",
+          "type": "text",
+          "enableWhen": [
+            {
+              "question": "5.3",
+              "operator": "=",
+              "answerBoolean": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
