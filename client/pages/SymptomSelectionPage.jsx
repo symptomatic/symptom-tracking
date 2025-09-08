@@ -390,11 +390,21 @@ export function SymptomSelectionPage(props) {
                       {currentExplanation.allMatches.length > 1 && (
                         <>
                           <Divider sx={{ my: 2 }} />
-                          <Typography variant="caption" color="text.secondary">
-                            Match Score: {currentExplanation.bestMatch.score} points
-                            ({currentExplanation.bestMatch.matchedRequired.length} required + 
-                            {currentExplanation.bestMatch.matchedOptional.length} optional symptoms)
-                          </Typography>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Typography variant="caption" color="text.secondary">
+                              Match Score: {currentExplanation.bestMatch.score} points
+                              ({currentExplanation.bestMatch.matchedRequired.length} required + 
+                              {currentExplanation.bestMatch.matchedOptional.length} optional symptoms)
+                            </Typography>
+                            <Button
+                              variant="outlined"
+                              size="small"
+                              onClick={() => navigate('/plan-definitions')}
+                              sx={{ ml: 2 }}
+                            >
+                              Plan Library
+                            </Button>
+                          </Box>
                         </>
                       )}
                     </Box>
