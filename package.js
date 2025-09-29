@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'clinical:symptom-tracking',
+  name: 'symptomatic:symptom-tracking',
   version: '0.1.0',
   summary: 'Medical symptom assessment and tracking for spaceflight participants',
   git: 'https://github.com/clinical-meteor/symptom-tracking',

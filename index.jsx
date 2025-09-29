@@ -49,7 +49,7 @@ let SidebarWorkflows = [
     requireAuth: true
   },
   {
-    primaryText: 'Symptom Back Tracker',
+    primaryText: 'Symptom Backtracker',
     to: '/symptom-back-tracker',
     iconName: 'notepad',
     requireAuth: true
@@ -82,7 +82,7 @@ export {
 
 // Also attach to Package for Meteor's package system
 if (typeof Package !== 'undefined') {
-  Package['clinical:symptom-tracking'] = {
+  Package['symptomatic:symptom-tracking'] = {
     DynamicRoutes,
     SidebarWorkflows,
     FooterButtons
