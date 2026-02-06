@@ -6,6 +6,7 @@ import React from 'react';
 import { IssueReportPage } from './client/pages/IssueReportPage';
 import { SymptomSelectionPage } from './client/pages/SymptomSelectionPage';
 import { BackTrackerPage } from './client/pages/BackTrackerPage';
+import { SmokingStatusPage } from './client/pages/SmokingStatusPage';
 
 // Import icons
 import { 
@@ -35,6 +36,12 @@ let DynamicRoutes = [
     path: '/symptom-back-tracker',
     element: <BackTrackerPage />,
     requireAuth: true
+  },
+  {
+    name: 'SmokingStatus',
+    path: '/smoking-status',
+    element: <SmokingStatusPage />,
+    requireAuth: true
   }
 ];
 
@@ -49,9 +56,15 @@ let SidebarWorkflows = [
     requireAuth: true
   },
   {
-    primaryText: 'Symptom Back Tracker',
+    primaryText: 'Symptom Backtracker',
     to: '/symptom-back-tracker',
     iconName: 'notepad',
+    requireAuth: true
+  },
+  {
+    primaryText: 'Smoking Status',
+    to: '/smoking-status',
+    iconName: 'smoking_rooms',
     requireAuth: true
   }
 ];
@@ -77,12 +90,13 @@ export {
   FooterButtons,
   IssueReportPage,
   SymptomSelectionPage,
-  BackTrackerPage
+  BackTrackerPage,
+  SmokingStatusPage
 };
 
 // Also attach to Package for Meteor's package system
 if (typeof Package !== 'undefined') {
-  Package['clinical:symptom-tracking'] = {
+  Package['symptomatic:symptom-tracking'] = {
     DynamicRoutes,
     SidebarWorkflows,
     FooterButtons

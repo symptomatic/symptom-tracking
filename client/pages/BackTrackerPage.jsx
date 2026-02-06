@@ -441,11 +441,21 @@ export function BackTrackerPage(props) {
   const nextMonth = React.useMemo(() => generateCalendarMonth(1), [dateRanges, dateRange, cycleMoonDates]);
 
   return (
-    <Box id="symptomBackTrackerPage" sx={{ px: 3, py: 4 }}>
+    <Box 
+      id="symptomBackTrackerPage" 
+      sx={{ 
+        px: 3, 
+        py: 4,
+        bgcolor: theme => theme.palette.mode === 'light' 
+          ? theme.palette.grey[50] 
+          : theme.palette.background.default,
+        minHeight: '100vh'
+      }}
+    >
       {/* Header with title and view toggle buttons */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography variant="h4">
-          Symptom Back Tracker
+          Symptom Backtracker
         </Typography>
         <Stack direction="row" spacing={1}>
           <Button
