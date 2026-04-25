@@ -8,6 +8,11 @@ import { SymptomSelectionPage } from './client/pages/SymptomSelectionPage';
 import { BackTrackerPage } from './client/pages/BackTrackerPage';
 import { SmokingStatusPage } from './client/pages/SmokingStatusPage';
 
+// Import reusable components
+import { SymptomSelector } from './client/components/SymptomSelector';
+import { IssueReportInput } from './client/components/IssueReportInput';
+import SymptomsTabContent from './client/SymptomsTabContent';
+
 // Import icons
 import { 
   MedicalServices as MedicalIcon,
@@ -84,14 +89,17 @@ let FooterButtons = [
 //====================================================================================
 // Export all package APIs
 
-export { 
-  DynamicRoutes, 
+export {
+  DynamicRoutes,
   SidebarWorkflows,
   FooterButtons,
   IssueReportPage,
   SymptomSelectionPage,
   BackTrackerPage,
-  SmokingStatusPage
+  SmokingStatusPage,
+  SymptomSelector,
+  IssueReportInput,
+  SymptomsTabContent
 };
 
 // Also attach to Package for Meteor's package system
@@ -99,6 +107,7 @@ if (typeof Package !== 'undefined') {
   Package['symptomatic:symptom-tracking'] = {
     DynamicRoutes,
     SidebarWorkflows,
-    FooterButtons
+    FooterButtons,
+    SymptomsTabContent
   };
 }

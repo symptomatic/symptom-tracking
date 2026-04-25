@@ -1,8 +1,7 @@
 // packages/symptom-tracking/server/methods/performSemanticSearch.js
 
 import { Meteor } from 'meteor/meteor';
-import { ValidatedMethod } from 'meteor/mdg:validated-method';
-import SimpleSchema from 'simpl-schema';
+import { check, Match } from 'meteor/check';
 import { get } from 'lodash';
 import { fetch } from 'meteor/fetch';
 
@@ -44,28 +43,11 @@ async function callMcpTool(toolName, args) {
 }
 
 // Server method for performing semantic search on medical conditions
-export const performSemanticSearch = new ValidatedMethod({
-  name: 'performSemanticSearch',
-  
-  validate: new SimpleSchema({
-    query: {
-      type: String,
-      min: 1
-    },
-    resourceType: {
-      type: String,
-      allowedValues: ['Condition', 'Observation', 'Procedure'],
-      optional: true
-    },
-    limit: {
-      type: SimpleSchema.Integer,
-      min: 1,
-      max: 100,
-      optional: true
-    }
-  }).validator(),
-
-  async run({ query, resourceType = 'Condition', limit = 20 }) {
+Meteor.methods({
+  'performSemanticSearch': async function({ query, resourceType = 'Condition', limit = 20 }) {
+    check(query, String);
+    check(resourceType, Match.Optional(String));
+    check(limit, Match.Optional(Number));
     console.log(`performSemanticSearch: Searching for "${query}" in ${resourceType} resources`);
 
     try {
