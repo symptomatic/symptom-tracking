@@ -1,0 +1,15 @@
+{
+  "name": "symptom-tracking",
+  "displayName": "Symptom Tracking",
+  "routes": [
+    { "name": "IssueReport", "path": "/issue-report", "component": "IssueReportPage", "requireAuth": true },
+    { "name": "SymptomSelection", "path": "/symptom-selection", "component": "SymptomSelectionPage", "requireAuth": true },
+    { "name": "SymptomBackTracker", "path": "/symptom-back-tracker", "component": "BackTrackerPage", "requireAuth": true },
+    { "name": "SmokingStatus", "path": "/smoking-status", "component": "SmokingStatusPage", "requireAuth": true }
+  ],
+  "sidebarItems": [
+    { "primaryText": "Report Medical Issue", "to": "/issue-report", "iconName": "MedicalServices", "requireAuth": true },
+    { "primaryText": "Symptom Backtracker", "to": "/symptom-back-tracker", "iconName": "EventNote", "requireAuth": true },
+    { "primaryText": "Smoking Status", "to": "/smoking-status", "iconName": "SmokingRooms", "requireAuth": true }
+  ]
+}

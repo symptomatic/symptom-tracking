@@ -162,6 +162,34 @@ Meteor.methods({
           code: '87715008',
           system: 'http://snomed.info/sct',
           description: 'Lack of adequate saliva in mouth'
+        },
+        {
+          id: 'eye-fatigue',
+          display: 'Eye fatigue (asthenopia)',
+          code: '68025005',
+          system: 'http://snomed.info/sct',
+          description: 'Visual fatigue, eye strain, or discomfort from prolonged use of the eyes'
+        },
+        {
+          id: 'photophobia',
+          display: 'Light sensitivity (photophobia)',
+          code: '409668002',
+          system: 'http://snomed.info/sct',
+          description: 'Abnormal sensitivity to light causing discomfort or pain, overwhelming brightness'
+        },
+        {
+          id: 'photokeratitis',
+          display: 'Photokeratitis (welder\'s flash)',
+          code: '1714005',
+          system: 'http://snomed.info/sct',
+          description: 'Corneal injury from UV exposure such as welding arc, snow blindness, or intense light'
+        },
+        {
+          id: 'solar-retinopathy',
+          display: 'Solar retinopathy',
+          code: '1135000',
+          system: 'http://snomed.info/sct',
+          description: 'Retinal damage from viewing solar eclipse or prolonged sun exposure without protection'
         }
       ];
 

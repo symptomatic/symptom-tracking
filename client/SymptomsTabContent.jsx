@@ -39,7 +39,7 @@ function getSeverityLabel(severity) {
 
 // --- Component ---
 
-export default function SymptomsTabContent({ isDark, cardBgColor, cardTextColor }) {
+export default function SymptomsTabContent({ isDark, cardBgColor, cardTextColor, noteDate, simulationMeta }) {
   // Patient context from Session
   const selectedPatient = useTracker(function() {
     return Session.get('selectedPatient');
@@ -72,19 +72,23 @@ export default function SymptomsTabContent({ isDark, cardBgColor, cardTextColor 
       return { todayConditions: [] };
     }
 
-    const todayStart = moment().startOf('day').toISOString();
-    const todayEnd = moment().endOf('day').toISOString();
+    const dayStart = noteDate
+      ? new Date(noteDate + 'T00:00:00').toISOString()
+      : moment().startOf('day').toISOString();
+    const dayEnd = noteDate
+      ? new Date(noteDate + 'T23:59:59.999').toISOString()
+      : moment().endOf('day').toISOString();
 
     return {
       todayConditions: Conditions.find({
         'subject.reference': { $regex: selectedPatientId },
         recordedDate: {
-          $gte: todayStart,
-          $lte: todayEnd
+          $gte: dayStart,
+          $lte: dayEnd
         }
       }).fetch()
     };
-  }, [selectedPatientId]);
+  }, [selectedPatientId, noteDate]);
 
   // Search handler
   async function handleSearch() {
@@ -146,9 +150,9 @@ export default function SymptomsTabContent({ isDark, cardBgColor, cardTextColor 
     setSubmitting(true);
     setError(null);
 
-    const patientId = get(selectedPatient, '_id');
+    const patientId = selectedPatientId;
     const patientName = getPersonName(selectedPatient);
-    const now = new Date().toISOString();
+    const now = noteDate ? new Date(noteDate + 'T12:00:00').toISOString() : new Date().toISOString();
 
     try {
       for (let i = 0; i < selectedSymptoms.length; i++) {
@@ -193,6 +197,7 @@ export default function SymptomsTabContent({ isDark, cardBgColor, cardTextColor 
             display: patientName
           },
           recordedDate: now,
+          meta: simulationMeta,
           note: notes.trim() ? [{ text: notes.trim() }] : undefined
         };
 
@@ -553,7 +558,7 @@ export default function SymptomsTabContent({ isDark, cardBgColor, cardTextColor 
             }}>
               <CardHeader
                 title="Today's Log"
-                subheader={moment().format('ddd, MMM D')}
+                subheader={noteDate ? moment(noteDate).format('ddd, MMM D') : moment().format('ddd, MMM D')}
                 titleTypographyProps={{ variant: 'subtitle1' }}
                 sx={{
                   pb: 0,
