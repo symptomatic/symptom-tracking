@@ -25,6 +25,6 @@
     "honeycomb",
     "node-on-fhir"
   ],
-  "author": "Clinical Meteor",
-  "license": "Artistic-2.0"
+  "author": "Abigail Watson",
+  "license": "Artistic 2.0"
 }
