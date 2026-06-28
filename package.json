@@ -1,5 +1,5 @@
 {
-  "name": "@node-on-fhir/symptom-tracking",
+  "name": "@awatson1978/symptom-tracking",
   "version": "0.1.0",
   "description": "Medical symptom assessment and tracking for spaceflight participants",
   "main": "client.js",
