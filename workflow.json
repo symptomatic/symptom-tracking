@@ -1,5 +1,6 @@
 {
   "name": "symptom-tracking",
+  "serverEntry": "./server",
   "displayName": "Symptom Tracking",
   "routes": [
     { "name": "IssueReport", "path": "/issue-report", "component": "IssueReportPage", "requireAuth": true },
