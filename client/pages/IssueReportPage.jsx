@@ -148,9 +148,8 @@ export function IssueReportPage(props) {
   }
 
   return (
-    <Box sx={{ 
-      minHeight: '100vh', 
-      backgroundColor: theme.palette.mode === 'dark' ? theme.palette.background.default : theme.palette.grey[50],
+    <Box sx={{
+      minHeight: '100vh',
       pt: 2
     }}>
     <Container id="issueReportPage" maxWidth="md" sx={{ pb: 4 }}>
