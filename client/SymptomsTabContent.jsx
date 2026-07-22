@@ -104,7 +104,7 @@ export default function SymptomsTabContent({ isDark, cardBgColor, cardTextColor,
     setHasSearched(true);
 
     try {
-      const results = await Meteor.callAsync('performSemanticSearch', {
+      const results = await Meteor.rpc('symptomTracking.semanticSearch', {
         query: trimmed,
         resourceType: 'Condition',
         limit: 20
@@ -201,7 +201,7 @@ export default function SymptomsTabContent({ isDark, cardBgColor, cardTextColor,
           note: notes.trim() ? [{ text: notes.trim() }] : undefined
         };
 
-        await Meteor.callAsync('conditions.create', condition);
+        await Meteor.rpc('conditions.create', condition);
         console.log('[SymptomsTabContent] Logged condition:', conditionId, symptom.display);
       }
 

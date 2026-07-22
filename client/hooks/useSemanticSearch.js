@@ -20,7 +20,7 @@ export function useSemanticSearch() {
 
     try {
       // Call the server method for semantic search
-      const results = await Meteor.callAsync('performSemanticSearch', {
+      const results = await Meteor.rpc('symptomTracking.semanticSearch', {
         query: searchQuery,
         resourceType: 'Condition', // We're searching for medical conditions
         limit: 20 // Reasonable number of results to show

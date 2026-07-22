@@ -315,7 +315,7 @@ export function BackTrackerPage(props) {
         recordedDate: moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ')
       };
       
-      await Meteor.callAsync('conditions.create', dataToSave);
+      await Meteor.rpc('conditions.create', dataToSave);
       
       // Reset form for next entry
       setCondition(prev => ({

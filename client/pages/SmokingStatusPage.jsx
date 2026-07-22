@@ -261,7 +261,7 @@ export function SmokingStatusPage(props) {
       }
 
       // Save to server
-      const result = await Meteor.callAsync('symptomTracking.saveSmokingStatus', {
+      const result = await Meteor.rpc('symptomTracking.saveSmokingStatus', {
         observation: observation,
         patientId: patientId,
         isUpdate: mode === 'edit'

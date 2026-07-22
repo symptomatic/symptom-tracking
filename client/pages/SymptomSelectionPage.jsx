@@ -101,7 +101,7 @@ export function SymptomSelectionPage(props) {
       
       setIsSearching(true);
       try {
-        const results = await Meteor.callAsync('performSemanticSearch', {
+        const results = await Meteor.rpc('symptomTracking.semanticSearch', {
           query: issueDescription,
           resourceType: 'Condition',
           limit: 20

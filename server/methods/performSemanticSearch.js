@@ -1,7 +1,6 @@
 // packages/symptom-tracking/server/methods/performSemanticSearch.js
 
 import { Meteor } from 'meteor/meteor';
-import { check, Match } from 'meteor/check';
 import { get } from 'lodash';
 import { fetch } from 'meteor/fetch';
 
@@ -42,12 +41,29 @@ async function callMcpTool(toolName, args) {
   return null;
 }
 
-// Server method for performing semantic search on medical conditions
-Meteor.methods({
-  'performSemanticSearch': async function({ query, resourceType = 'Condition', limit = 20 }) {
-    check(query, String);
-    check(resourceType, Match.Optional(String));
-    check(limit, Match.Optional(Number));
+// Server method for performing semantic search on medical conditions.
+//
+// Canonical name is dotted (symptomTracking.semanticSearch); the legacy bare
+// 'performSemanticSearch' name is kept as an alias so DDP call sites (and the
+// positional adapter) keep working. Handles patient-adjacent clinical search ->
+// phi: true. BEHAVIOR CHANGE: the Atmosphere original had NO userId guard;
+// under the registry default this is now requireAuth: true (was effectively
+// public). Flagged for review if a public/anonymous caller relied on it.
+Meteor.ServerMethods.define('symptomTracking.semanticSearch', {
+  description: 'Semantic search over Condition resources (MCP-backed with a text-search fallback).',
+  aliases: ['performSemanticSearch'],
+  phi: true,
+  schemaObject: {
+    type: 'object',
+    properties: {
+      query: { type: 'string' },
+      resourceType: { type: 'string' },
+      limit: { type: 'number' }
+    },
+    required: ['query']
+  }
+}, async function(params, context) {
+    const { query, resourceType = 'Condition', limit = 20 } = params;
     console.log(`performSemanticSearch: Searching for "${query}" in ${resourceType} resources`);
 
     try {
@@ -217,5 +233,4 @@ Meteor.methods({
       console.error('performSemanticSearch: Error during search', error);
       throw new Meteor.Error('search-failed', 'Failed to perform semantic search', error.message);
     }
-  }
 });
