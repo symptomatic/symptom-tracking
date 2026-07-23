@@ -81,7 +81,7 @@ Meteor.ServerMethods.define('symptomTracking.saveSmokingStatus', {
           { $set: enrichedObservation }
         );
 
-        context.log(`Updated smoking status for patient ${patientId}`);
+        context.log.info('Updated smoking status', { patientId: patientId });
         return {
           success: true,
           id: existingRecord._id,
@@ -107,7 +107,7 @@ Meteor.ServerMethods.define('symptomTracking.saveSmokingStatus', {
       // Save US Core version with different identifier
       await Observations.insertAsync(usCoreObservation);
 
-      context.log(`Saved smoking status for patient ${patientId}: ${observationId}`);
+      context.log.info('Saved smoking status', { patientId: patientId, observationId: observationId });
       return {
         success: true,
         id: observationId,
@@ -115,7 +115,7 @@ Meteor.ServerMethods.define('symptomTracking.saveSmokingStatus', {
       };
     } else {
       // Fallback if collections not available
-      context.log('Collections not available, simulation mode');
+      context.log.warn('Collections not available, simulation mode');
       return {
         success: true,
         id: 'simulation-' + Date.now(),
